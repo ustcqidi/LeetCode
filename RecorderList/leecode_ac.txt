@@ -1,0 +1,85 @@
+public class Solution {
+
+	private ListNode findMidNode(ListNode head) {
+		/**
+		 * double pointer: 
+		 * first pointer go 2 steps everytime, second pointer go 1 step everytime
+		 * when the first pointer go to the end of list, the position of second pointer is the mid node 
+		 */
+		
+		ListNode midNode = head, travelNode = head;
+		
+		while(travelNode != null && travelNode.next != null) {
+			midNode = midNode.next;
+			
+			travelNode = travelNode.next;
+			
+			if(travelNode != null) {
+				travelNode = travelNode.next;
+			} else {
+				break;
+			}
+		}
+		
+		return midNode;
+	}
+
+	
+	private ListNode reverseList(ListNode head) {
+
+		/**
+		 * cool solution for reverse list
+		 */
+		
+		if(head == null || head.next == null)
+			return head;
+		
+		ListNode pre = head, curr = head.next;
+		
+		while(curr != null) {
+			ListNode tmpNode = curr.next;
+			
+			curr.next = pre;
+			
+			pre = curr;
+			curr = tmpNode;
+		}
+		
+		head.next = null;
+		
+		return pre;
+	}
+
+	private ListNode mergeList(ListNode firstListHead, ListNode secondListHead) {
+
+		ListNode firstListCurr = firstListHead;
+		ListNode secondListCurr = secondListHead;
+		
+		while(secondListCurr != null)
+		{
+			ListNode firstNodeTmp = firstListCurr.next;
+			ListNode secondNodeTmp = secondListCurr.next;
+			
+			secondListCurr.next = firstListCurr.next;
+			firstListCurr.next = secondListCurr;
+			
+			firstListCurr = firstNodeTmp;
+			secondListCurr = secondNodeTmp;
+			
+		}
+		
+		return firstListHead;
+	}
+
+	public void reorderList(ListNode head) {
+		if(head==null||head.next==null) return;
+		    
+		ListNode midNode = findMidNode(head);
+		ListNode firstListHead = head, secondListHead = midNode.next;
+		midNode.next = null;
+		
+		head = mergeList(firstListHead, reverseList(secondListHead));
+	}
+	
+
+}
