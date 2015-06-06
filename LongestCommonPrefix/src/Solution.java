@@ -27,9 +27,11 @@ public class Solution {
     		
     		if(i >= strs.length && tmpPrefix.length() > longestPrefix.length()) {
     			longestPrefix = tmpPrefix;
+    			subStrIndex++;
+    		} else {
+    			return longestPrefix;
     		}
     		
-    		subStrIndex++;
     	}
     	
     	return longestPrefix;
