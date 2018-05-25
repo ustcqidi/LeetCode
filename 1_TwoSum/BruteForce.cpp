@@ -1,7 +1,3 @@
-/**
-暴力搜素，时间复杂度o(n^2)
-*/
-
 class Solution {
 public:
     vector<int> twoSum(vector<int> &nums, int target) {
@@ -13,8 +9,8 @@ public:
             for (j = i+1; j < len; j++) {
                 int obj = target - nums[i];
                 if (obj == nums[j]) {
-                    ret.push(i);
-                    ret.push(j);
+                    ret.push_back(i);
+                    ret.push_back(j);
 
                     return ret;
                 }
